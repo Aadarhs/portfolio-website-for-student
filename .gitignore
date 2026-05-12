@@ -5,11 +5,13 @@ __v0_jsx-dev-runtime.ts
 .snowflake/
 .v0-trash/
 .vercel/
+.github/
+
 
 # Environment variables
 .env*.local
 
 # Common ignores
 node_modules
-.next/
+dist/
 .DS_Store
