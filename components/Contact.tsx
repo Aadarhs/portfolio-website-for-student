@@ -23,38 +23,11 @@ export default function Contact() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setStatus('loading')
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-
-      const data = await response.json()
-
-      if (response.ok) {
-        setStatus('success')
-        setStatusMessage('Message sent successfully! I\'ll get back to you soon.')
-        setFormData({
-          name: '',
-          email: '',
-          subject: '',
-          message: '',
-        })
-        setTimeout(() => setStatus('idle'), 5000)
-      } else {
-        setStatus('error')
-        setStatusMessage(data.error || 'Failed to send message. Please try again.')
-      }
-    } catch (error) {
-      setStatus('error')
-      setStatusMessage('An error occurred. Please try again later.')
-      console.error('Form submission error:', error)
-    }
+    const mailtoLink = `mailto:Aadarsha9808@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`
+    window.location.href = mailtoLink
+    setStatus('success')
+    setStatusMessage('Opening your email client...')
+    setTimeout(() => setStatus('idle'), 3000)
   }
 
   return (
