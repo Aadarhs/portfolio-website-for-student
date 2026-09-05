@@ -1,0 +1,110 @@
+{
+  "scanInfo": {
+    "target": "http://example.com",
+    "timestamp": "2026-07-14T09:42:20.780Z",
+    "durationSeconds": 4.8,
+    "pagesScanned": 1,
+    "formsFound": 0,
+    "linksFound": 1
+  },
+  "summary": {
+    "totalFindings": 8,
+    "bySeverity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 3,
+      "low": 4,
+      "info": 1
+    }
+  },
+  "findings": [
+    {
+      "type": "Missing Security Header",
+      "severity": "medium",
+      "detail": "HTTP Strict Transport Security not set",
+      "evidence": "Header 'strict-transport-security' not present in response",
+      "url": "http://example.com",
+      "parameter": null,
+      "payload": null,
+      "remediation": "Add the 'strict-transport-security' header to your HTTP responses.",
+      "timestamp": "2026-07-14T09:42:16.566Z"
+    },
+    {
+      "type": "Missing Security Header",
+      "severity": "medium",
+      "detail": "Content Security Policy not set",
+      "evidence": "Header 'content-security-policy' not present in response",
+      "url": "http://example.com",
+      "parameter": null,
+      "payload": null,
+      "remediation": "Add the 'content-security-policy' header to your HTTP responses.",
+      "timestamp": "2026-07-14T09:42:16.566Z"
+    },
+    {
+      "type": "Missing Security Header",
+      "severity": "medium",
+      "detail": "X-Frame-Options not set (clickjacking risk)",
+      "evidence": "Header 'x-frame-options' not present in response",
+      "url": "http://example.com",
+      "parameter": null,
+      "payload": null,
+      "remediation": "Add the 'x-frame-options' header to your HTTP responses.",
+      "timestamp": "2026-07-14T09:42:16.566Z"
+    },
+    {
+      "type": "Missing Security Header",
+      "severity": "low",
+      "detail": "X-Content-Type-Options not set",
+      "evidence": "Header 'x-content-type-options' not present in response",
+      "url": "http://example.com",
+      "parameter": null,
+      "payload": null,
+      "remediation": "Add the 'x-content-type-options' header to your HTTP responses.",
+      "timestamp": "2026-07-14T09:42:16.566Z"
+    },
+    {
+      "type": "Missing Security Header",
+      "severity": "low",
+      "detail": "X-XSS-Protection not set",
+      "evidence": "Header 'x-xss-protection' not present in response",
+      "url": "http://example.com",
+      "parameter": null,
+      "payload": null,
+      "remediation": "Add the 'x-xss-protection' header to your HTTP responses.",
+      "timestamp": "2026-07-14T09:42:16.566Z"
+    },
+    {
+      "type": "Missing Security Header",
+      "severity": "low",
+      "detail": "Referrer-Policy not set",
+      "evidence": "Header 'referrer-policy' not present in response",
+      "url": "http://example.com",
+      "parameter": null,
+      "payload": null,
+      "remediation": "Add the 'referrer-policy' header to your HTTP responses.",
+      "timestamp": "2026-07-14T09:42:16.566Z"
+    },
+    {
+      "type": "Missing Security Header",
+      "severity": "low",
+      "detail": "Permissions-Policy not set",
+      "evidence": "Header 'permissions-policy' not present in response",
+      "url": "http://example.com",
+      "parameter": null,
+      "payload": null,
+      "remediation": "Add the 'permissions-policy' header to your HTTP responses.",
+      "timestamp": "2026-07-14T09:42:16.566Z"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "info",
+      "detail": "Server header reveals software version",
+      "evidence": "Server: cloudflare",
+      "url": "http://example.com",
+      "parameter": null,
+      "payload": null,
+      "remediation": "Remove or obfuscate the Server header.",
+      "timestamp": "2026-07-14T09:42:16.566Z"
+    }
+  ]
+}

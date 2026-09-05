@@ -1,64 +1,11 @@
 'use client'
 
-import { ExternalLink, Github } from 'lucide-react'
+import { ExternalLink, Github, ArrowRight } from 'lucide-react'
+import { usePortfolioData } from '@/lib/use-portfolio'
+import Link from 'next/link'
 
 export default function Projects() {
-  const projects = [
-    {
-      title: 'Network Intrusion Detection System',
-      description: 'Built a custom IDS using Python and Scapy to monitor network traffic and detect suspicious patterns. Implemented signature-based detection and alerting mechanisms.',
-      technologies: ['Python', 'Scapy', 'Wireshark', 'Linux'],
-      links: {
-        github: 'https://github.com',
-        demo: 'https://github.com',
-      },
-    },
-    {
-      title: 'Web Application Security Scanner',
-      description: 'Developed an automated vulnerability scanner for web applications focusing on OWASP Top 10 vulnerabilities. Includes SQL injection, XSS, and CSRF detection.',
-      technologies: ['JavaScript', 'Node.js', 'Burp Suite', 'SQL'],
-      links: {
-        github: 'https://github.com',
-        demo: 'https://github.com',
-      },
-    },
-    {
-      title: 'Cryptography Implementation Lab',
-      description: 'Implemented various encryption algorithms including AES, RSA, and hash functions from scratch. Explored symmetric and asymmetric cryptography concepts.',
-      technologies: ['Python', 'Cryptography', 'Mathematics', 'Security Protocols'],
-      links: {
-        github: 'https://github.com',
-        demo: 'https://github.com',
-      },
-    },
-    {
-      title: 'Incident Response Playbook',
-      description: 'Created comprehensive documentation for incident response procedures including detection, containment, and recovery steps for common attack vectors.',
-      technologies: ['Documentation', 'Risk Management', 'Security Operations', 'Analysis'],
-      links: {
-        github: 'https://github.com',
-        demo: 'https://github.com',
-      },
-    },
-    {
-      title: 'Linux Hardening Guide',
-      description: 'Documented systematic approach to hardening Linux systems including SSH configuration, firewall rules, and service management best practices.',
-      technologies: ['Linux', 'Bash', 'Security Hardening', 'Systems Administration'],
-      links: {
-        github: 'https://github.com',
-        demo: 'https://github.com',
-      },
-    },
-    {
-      title: 'Malware Analysis Lab',
-      description: 'Analyzed malware behavior in isolated environments using static and dynamic analysis techniques. Documented findings and indicators of compromise.',
-      technologies: ['Reverse Engineering', 'Sandboxing', 'IDA Pro', 'Wireshark'],
-      links: {
-        github: 'https://github.com',
-        demo: 'https://github.com',
-      },
-    },
-  ]
+  const data = usePortfolioData()
 
   return (
     <section id="projects" className="py-20 scroll-mt-16">
@@ -71,7 +18,7 @@ export default function Projects() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {projects.map((project) => (
+          {data.projects.projects.map((project) => (
             <div
               key={project.title}
               className="glassmorphism p-6 space-y-4 hover:border-primary/50 transition-all hover:shadow-lg hover:shadow-cyan-500/10 group"
@@ -80,9 +27,7 @@ export default function Projects() {
                 {project.title}
               </h3>
 
-              <p className="text-muted-foreground leading-relaxed">
-                {project.description}
-              </p>
+              <p className="text-muted-foreground leading-relaxed">{project.description}</p>
 
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech) => (
@@ -96,23 +41,21 @@ export default function Projects() {
               </div>
 
               <div className="flex gap-3 pt-4 border-t border-white/10">
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="flex items-center gap-2 text-sm text-primary hover:text-accent transition-colors font-medium"
+                >
+                  View Details
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
                 <a
-                  href={project.links.github}
+                  href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-primary hover:text-accent transition-colors"
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
                   <Github className="h-4 w-4" />
                   Code
-                </a>
-                <a
-                  href={project.links.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-primary hover:text-accent transition-colors"
-                >
-                  <ExternalLink className="h-4 w-4" />
-                  Details
                 </a>
               </div>
             </div>

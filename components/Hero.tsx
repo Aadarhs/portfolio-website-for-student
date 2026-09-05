@@ -2,9 +2,11 @@
 
 import { useEffect, useRef } from 'react'
 import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react'
+import { usePortfolioData } from '@/lib/use-portfolio'
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const data = usePortfolioData()
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -13,11 +15,9 @@ export default function Hero() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    // Set canvas size
     canvas.width = canvas.offsetWidth
     canvas.height = canvas.offsetHeight
 
-    // Particle system
     const particles: Array<{
       x: number
       y: number
@@ -27,7 +27,6 @@ export default function Hero() {
       opacity: number
     }> = []
 
-    // Create initial particles
     for (let i = 0; i < 50; i++) {
       particles.push({
         x: Math.random() * canvas.width,
@@ -40,16 +39,13 @@ export default function Hero() {
     }
 
     const animate = () => {
-      // Clear canvas
       ctx.fillStyle = 'rgba(10, 14, 39, 0.1)'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-      // Draw and update particles
       particles.forEach((particle) => {
         particle.x += particle.vx
         particle.y += particle.vy
 
-        // Bounce off edges
         if (particle.x - particle.radius < 0 || particle.x + particle.radius > canvas.width) {
           particle.vx *= -1
           particle.x = Math.max(particle.radius, Math.min(canvas.width - particle.radius, particle.x))
@@ -59,14 +55,12 @@ export default function Hero() {
           particle.y = Math.max(particle.radius, Math.min(canvas.height - particle.radius, particle.y))
         }
 
-        // Draw particle
         ctx.fillStyle = `rgba(0, 217, 255, ${particle.opacity})`
         ctx.beginPath()
         ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2)
         ctx.fill()
       })
 
-      // Draw connections
       ctx.strokeStyle = 'rgba(0, 217, 255, 0.1)'
       ctx.lineWidth = 1
       for (let i = 0; i < particles.length; i++) {
@@ -89,7 +83,6 @@ export default function Hero() {
 
     animate()
 
-    // Handle canvas resize
     const handleResize = () => {
       canvas.width = canvas.offsetWidth
       canvas.height = canvas.offsetHeight
@@ -108,27 +101,21 @@ export default function Hero() {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center pt-16">
-      {/* Particle background */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full"
-      />
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
-      {/* Content */}
       <div className="relative z-10 text-center space-y-8 px-4">
         <div className="space-y-6">
           <h1 className="text-5xl sm:text-7xl font-bold text-balance">
-            <span className="glow-text">Cybersecurity</span>
+            <span className="glow-text">{data.hero.titleLine1}</span>
             <br />
-            <span className="text-foreground">Student & Enthusiast</span>
+            <span className="text-foreground">{data.hero.titleLine2}</span>
           </h1>
 
           <p className="text-xl sm:text-2xl text-muted-foreground max-w-2xl mx-auto text-balance">
-            Exploring the fundamentals of IT security through hands-on labs, penetration testing, and defensive strategies.
+            {data.hero.subtitle}
           </p>
         </div>
 
-        {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
           <button
             onClick={() => scrollToSection('projects')}
@@ -146,10 +133,9 @@ export default function Hero() {
           </button>
         </div>
 
-        {/* Social Links */}
         <div className="flex gap-6 justify-center pt-8">
           <a
-            href="https://github.com/Aadarhs"
+            href={data.hero.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 rounded-lg glassmorphism hover:glow-primary transition-all hover:scale-110"
@@ -159,7 +145,7 @@ export default function Hero() {
           </a>
 
           <a
-            href="https://www.linkedin.com/in/aadarhs-bhandari/"
+            href={data.hero.linkedinUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 rounded-lg glassmorphism hover:glow-primary transition-all hover:scale-110"
@@ -169,7 +155,7 @@ export default function Hero() {
           </a>
 
           <a
-            href="mailto:Aadarsha9808@gmail.com"
+            href={`mailto:${data.hero.email}`}
             className="p-3 rounded-lg glassmorphism hover:glow-primary transition-all hover:scale-110"
             aria-label="Email"
           >
@@ -178,7 +164,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
         <div className="animate-bounce">
           <svg className="h-8 w-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">

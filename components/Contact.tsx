@@ -2,8 +2,10 @@
 
 import { useState, FormEvent } from 'react'
 import { Mail, Phone, Linkedin, Github } from 'lucide-react'
+import { usePortfolioData } from '@/lib/use-portfolio'
 
 export default function Contact() {
+  const data = usePortfolioData()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,7 +25,7 @@ export default function Contact() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const mailtoLink = `mailto:Aadarsha9808@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`
+    const mailtoLink = `mailto:${data.contact.email}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`
     window.location.href = mailtoLink
     setStatus('success')
     setStatusMessage('Opening your email client...')
@@ -41,7 +43,6 @@ export default function Contact() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Contact Info */}
           <div className="space-y-6">
             <div className="glassmorphism p-6 space-y-4">
               <div className="flex items-center gap-4">
@@ -50,8 +51,8 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-muted-foreground text-sm">Email</p>
-                  <a href="mailto:Aadarsha9808@gmail.com" className="text-foreground hover:text-primary transition-colors">
-                    Aadarsha9808@gmail.com
+                  <a href={`mailto:${data.contact.email}`} className="text-foreground hover:text-primary transition-colors">
+                    {data.contact.email}
                   </a>
                 </div>
               </div>
@@ -64,8 +65,8 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-muted-foreground text-sm">Phone</p>
-                  <a href="tel:+9779869419057" className="text-foreground hover:text-accent transition-colors">
-                    +977 9869419057
+                  <a href={`tel:${data.contact.phone.replace(/\s/g, '')}`} className="text-foreground hover:text-accent transition-colors">
+                    {data.contact.phone}
                   </a>
                 </div>
               </div>
@@ -75,7 +76,7 @@ export default function Contact() {
               <p className="text-foreground font-semibold">Follow Me</p>
               <div className="flex gap-4">
                 <a
-                  href="https://github.com/Aadarhs"
+                  href={data.contact.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 glassmorphism rounded-lg hover:glow-primary transition-all hover:scale-110"
@@ -84,7 +85,7 @@ export default function Contact() {
                   <Github className="h-6 w-6 text-primary" />
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/aadarhs-bhandari/"
+                  href={data.contact.linkedinUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 glassmorphism rounded-lg hover:glow-primary transition-all hover:scale-110"
@@ -93,7 +94,7 @@ export default function Contact() {
                   <Linkedin className="h-6 w-6 text-primary" />
                 </a>
                 <a
-                  href="mailto:Aadarsha9808@gmail.com"
+                  href={`mailto:${data.contact.email}`}
                   className="p-3 glassmorphism rounded-lg hover:glow-primary transition-all hover:scale-110"
                   aria-label="Email"
                 >
@@ -103,7 +104,6 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Contact Form */}
           <div className="lg:col-span-2">
             <form onSubmit={handleSubmit} className="glassmorphism p-8 space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

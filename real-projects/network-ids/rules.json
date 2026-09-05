@@ -1,0 +1,78 @@
+{
+  "rules": [
+    {
+      "id": "SYN-001",
+      "name": "SYN Flood Attack",
+      "description": "Detects a high rate of TCP SYN packets from a single source, indicative of a SYN flood.",
+      "severity": "high",
+      "protocol": "TCP",
+      "condition": {
+        "tcp_flags": "S",
+        "source_rate_threshold": 20,
+        "window_seconds": 10
+      },
+      "action": "alert_and_log"
+    },
+    {
+      "id": "SCAN-001",
+      "name": "Port Scan Detection",
+      "description": "Detects when a single source contacts many distinct destination ports in a short window.",
+      "severity": "medium",
+      "protocol": "TCP",
+      "condition": {
+        "distinct_dst_ports": 15,
+        "window_seconds": 10
+      },
+      "action": "alert_and_log"
+    },
+    {
+      "id": "ICMP-001",
+      "name": "ICMP Flood",
+      "description": "Detects an excessive number of ICMP echo requests from a single source.",
+      "severity": "medium",
+      "protocol": "ICMP",
+      "condition": {
+        "icmp_type": 8,
+        "source_rate_threshold": 30,
+        "window_seconds": 10
+      },
+      "action": "alert_and_log"
+    },
+    {
+      "id": "DNS-001",
+      "name": "Suspicious DNS Volume",
+      "description": "Flags a source generating an unusually high volume of DNS queries which may indicate tunneling or C2 activity.",
+      "severity": "medium",
+      "protocol": "UDP",
+      "condition": {
+        "dst_port": 53,
+        "source_rate_threshold": 50,
+        "window_seconds": 10
+      },
+      "action": "alert_and_log"
+    },
+    {
+      "id": "DNS-002",
+      "name": "Unusually Long DNS Query",
+      "description": "DNS queries with names longer than 50 characters are often used for data exfiltration or tunneling.",
+      "severity": "high",
+      "protocol": "UDP",
+      "condition": {
+        "dst_port": 53,
+        "dns_query_min_length": 50
+      },
+      "action": "alert_and_log"
+    },
+    {
+      "id": "SUSPORT-001",
+      "name": "Suspicious Port Access",
+      "description": "Traffic directed at well-known vulnerable or administrative ports (telnet, FTP, SMB, etc.).",
+      "severity": "low",
+      "protocol": "TCP",
+      "condition": {
+        "dst_port_in": [21, 23, 445, 1433, 3306, 3389, 5900, 6667]
+      },
+      "action": "alert"
+    }
+  ]
+}

@@ -1,40 +1,19 @@
 'use client'
 
 import { Shield, Network, Code, Terminal, Lock, Search } from 'lucide-react'
+import { usePortfolioData } from '@/lib/use-portfolio'
+
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Shield,
+  Network,
+  Code,
+  Terminal,
+  Lock,
+  Search,
+}
 
 export default function Skills() {
-  const skillCategories = [
-    {
-      title: 'Security Fundamentals',
-      icon: Shield,
-      skills: ['Network Security', 'Cryptography', 'Security Protocols', 'Risk Management', 'Compliance'],
-    },
-    {
-      title: 'Technical Skills',
-      icon: Code,
-      skills: ['Python', 'Bash/Shell', 'JavaScript', 'SQL', 'HTML/CSS'],
-    },
-    {
-      title: 'Network & Systems',
-      icon: Network,
-      skills: ['TCP/IP', 'DNS & DHCP', 'Firewalls', 'Linux/Windows', 'Virtual Machines'],
-    },
-    {
-      title: 'Tools & Technologies',
-      icon: Terminal,
-      skills: ['Wireshark', 'Metasploit', 'Burp Suite', 'Nessus', 'Kali Linux'],
-    },
-    {
-      title: 'Defensive Strategies',
-      icon: Lock,
-      skills: ['Intrusion Detection', 'Incident Response', 'Vulnerability Assessment', 'Security Hardening', 'Access Control'],
-    },
-    {
-      title: 'Offensive Techniques',
-      icon: Search,
-      skills: ['Penetration Testing', 'Network Reconnaissance', 'Exploitation', 'Social Engineering Awareness', 'Web Security'],
-    },
-  ]
+  const data = usePortfolioData()
 
   return (
     <section id="skills" className="py-20 scroll-mt-16">
@@ -47,8 +26,8 @@ export default function Skills() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {skillCategories.map((category) => {
-            const Icon = category.icon
+          {data.skills.categories.map((category) => {
+            const Icon = iconMap[category.icon] || Shield
             return (
               <div
                 key={category.title}

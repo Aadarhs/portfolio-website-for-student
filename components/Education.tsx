@@ -1,31 +1,10 @@
 'use client'
 
 import { GraduationCap, Calendar } from 'lucide-react'
+import { usePortfolioData } from '@/lib/use-portfolio'
 
 export default function Education() {
-  const education = [
-    {
-      degree: 'Bachelor of Science in Information Technology',
-      institution: 'University Name',
-      period: '2022 - 2026 (Expected)',
-      gpa: 'GPA: 3.8/4.0',
-      highlights: ['Cybersecurity Specialization', 'Network Administration', 'Systems Security', 'Security Architecture'],
-    },
-    {
-      degree: 'Advanced Networking Fundamentals',
-      institution: 'Online Learning Platform',
-      period: '2023',
-      gpa: 'Completed',
-      highlights: ['Network Protocols', 'OSI Model', 'TCP/IP Stack', 'Network Troubleshooting'],
-    },
-    {
-      degree: 'Introduction to Cybersecurity',
-      institution: 'Community College',
-      period: '2022 - 2023',
-      gpa: 'Completed',
-      highlights: ['Security Concepts', 'Risk Assessment', 'Compliance & Standards', 'Security Best Practices'],
-    },
-  ]
+  const data = usePortfolioData()
 
   return (
     <section id="education" className="py-20 scroll-mt-16">
@@ -38,20 +17,17 @@ export default function Education() {
         </div>
 
         <div className="space-y-8">
-          {education.map((edu, index) => (
-            <div key={edu.degree} className="relative">
-              {/* Timeline line */}
-              {index !== education.length - 1 && (
+          {data.education.education.map((edu, index) => (
+            <div key={edu.degree + index} className="relative">
+              {index !== data.education.education.length - 1 && (
                 <div className="absolute left-8 top-20 w-1 h-32 bg-gradient-to-b from-accent/50 to-transparent" />
               )}
 
               <div className="flex gap-6">
-                {/* Timeline dot */}
                 <div className="relative z-10 pt-1">
                   <div className="w-4 h-4 rounded-full bg-accent shadow-lg shadow-green-500/50" />
                 </div>
 
-                {/* Content */}
                 <div className="glassmorphism p-6 space-y-4 flex-1">
                   <div className="flex items-start justify-between">
                     <div>

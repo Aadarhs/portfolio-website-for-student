@@ -1,31 +1,10 @@
 'use client'
 
 import { Briefcase, Calendar } from 'lucide-react'
+import { usePortfolioData } from '@/lib/use-portfolio'
 
 export default function Experience() {
-  const experiences = [
-    {
-      title: 'Security Lab Assistant',
-      company: 'University IT Department',
-      period: '2024 - Present',
-      description: 'Assisted in setting up and maintaining cybersecurity lab environment. Supported students in hands-on exercises and troubleshooted security tools.',
-      skills: ['Lab Management', 'Linux/Windows', 'Security Tools', 'Technical Support'],
-    },
-    {
-      title: 'Penetration Testing Intern',
-      company: 'Security Startup',
-      period: '2023 - 2024',
-      description: 'Conducted authorized penetration tests on client networks. Documented vulnerabilities and provided remediation recommendations.',
-      skills: ['Penetration Testing', 'Vulnerability Assessment', 'Report Writing', 'Client Communication'],
-    },
-    {
-      title: 'Network Security Trainee',
-      company: 'IT Solutions Company',
-      period: '2023',
-      description: 'Learned network security fundamentals and assisted in monitoring network infrastructure for security threats and anomalies.',
-      skills: ['Network Monitoring', 'IDS/IPS', 'Incident Response', 'Documentation'],
-    },
-  ]
+  const data = usePortfolioData()
 
   return (
     <section id="experience" className="py-20 scroll-mt-16">
@@ -38,20 +17,17 @@ export default function Experience() {
         </div>
 
         <div className="space-y-8">
-          {experiences.map((exp, index) => (
-            <div key={exp.title} className="relative">
-              {/* Timeline line */}
-              {index !== experiences.length - 1 && (
+          {data.experience.experiences.map((exp, index) => (
+            <div key={exp.title + index} className="relative">
+              {index !== data.experience.experiences.length - 1 && (
                 <div className="absolute left-8 top-20 w-1 h-16 bg-gradient-to-b from-primary/50 to-transparent" />
               )}
 
               <div className="flex gap-6">
-                {/* Timeline dot */}
                 <div className="relative z-10 pt-1">
                   <div className="w-4 h-4 rounded-full bg-primary shadow-lg shadow-cyan-500/50" />
                 </div>
 
-                {/* Content */}
                 <div className="glassmorphism p-6 space-y-4 flex-1">
                   <div className="flex items-start justify-between">
                     <div>

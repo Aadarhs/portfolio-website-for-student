@@ -1,0 +1,9 @@
+# Cryptography Implementation Lab
+# No external dependencies required!
+# All algorithms are implemented using only Python standard library.
+#
+# Python 3.7+ required for f-strings and type hints
+
+# Optional: For enhanced testing
+# pytest>=7.0.0
+# pytest-cov>=4.0.0

@@ -1,42 +1,10 @@
 'use client'
 
 import { Award, Calendar, ExternalLink } from 'lucide-react'
+import { usePortfolioData } from '@/lib/use-portfolio'
 
 export default function Certifications() {
-  const certifications = [
-    {
-      title: 'CompTIA Security+',
-      issuer: 'CompTIA',
-      issueDate: 'Expected 2025',
-      credentialUrl: '#',
-      description: 'Comprehensive security certification covering network security, threat management, and compliance.',
-      status: 'In Progress',
-    },
-    {
-      title: 'Google Cybersecurity Professional Certificate',
-      issuer: 'Google Career Certificates',
-      issueDate: '2024',
-      credentialUrl: '#',
-      description: 'Earned through Coursera - covering security fundamentals, threat analysis, and incident response.',
-      status: 'Completed',
-    },
-    {
-      title: 'Certified Ethical Hacker (CEH) - Candidate',
-      issuer: 'EC-Council',
-      issueDate: 'Expected 2025',
-      credentialUrl: '#',
-      description: 'Currently pursuing CEH certification to validate penetration testing and hacking knowledge.',
-      status: 'In Progress',
-    },
-    {
-      title: 'Linux Essentials',
-      issuer: 'Linux Professional Institute',
-      issueDate: '2023',
-      credentialUrl: '#',
-      description: 'Certified Linux Essentials demonstrating proficiency in Linux command line and system administration.',
-      status: 'Completed',
-    },
-  ]
+  const data = usePortfolioData()
 
   return (
     <section id="certifications" className="py-20 scroll-mt-16">
@@ -49,7 +17,7 @@ export default function Certifications() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {certifications.map((cert) => (
+          {data.certifications.certifications.map((cert) => (
             <div
               key={cert.title}
               className="glassmorphism p-6 space-y-4 hover:border-primary/50 transition-colors group"

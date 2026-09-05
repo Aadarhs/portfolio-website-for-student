@@ -9,6 +9,8 @@ import Experience from '@/components/Experience'
 import Education from '@/components/Education'
 import Certifications from '@/components/Certifications'
 import Contact from '@/components/Contact'
+import Footer from '@/components/Footer'
+import ScrollToTop from '@/components/ScrollToTop'
 
 export default function Home() {
   return (
@@ -24,6 +26,8 @@ export default function Home() {
         <Certifications />
         <Contact />
       </main>
+      <Footer />
+      <ScrollToTop />
     </div>
   )
 }

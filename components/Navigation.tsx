@@ -2,11 +2,11 @@
 
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
+import { usePortfolioData } from '@/lib/use-portfolio'
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
-
-  const navItems = ['About', 'Skills', 'Projects', 'Experience', 'Education', 'Contact']
+  const data = usePortfolioData()
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId.toLowerCase())
@@ -20,19 +20,17 @@ export default function Navigation() {
     <nav className="fixed top-0 w-full z-50 glassmorphism">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
           <div className="flex-shrink-0">
             <button
               onClick={() => scrollToSection('hero')}
               className="text-2xl font-bold glow-text hover:opacity-80 transition-opacity"
             >
-              Aadarsha
+              {data.navigation.logoText}
             </button>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => (
+            {data.navigation.navItems.map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
@@ -43,26 +41,20 @@ export default function Navigation() {
             ))}
           </div>
 
-          {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-foreground hover:bg-white/5 focus:outline-none"
             >
-              {isOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden bg-black/20 backdrop-blur">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {navItems.map((item) => (
+              {data.navigation.navItems.map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}

@@ -1,0 +1,53 @@
+*filter
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT ACCEPT [0:0]
+:SSH_RATE_LIMIT - [0:0]
+
+# --- Loopback ---
+-A INPUT -i lo -j ACCEPT
+-A OUTPUT -o lo -j ACCEPT
+
+# --- Drop Invalid Packets ---
+-A INPUT -m conntrack --ctstate INVALID -j DROP
+-A FORWARD -m conntrack --ctstate INVALID -j DROP
+
+# --- Allow Established/Related ---
+-A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+-A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+# --- ICMP (rate limited) ---
+-A INPUT -p icmp --icmp-type echo-request -m limit --limit 1/s --limit-burst 4 -j ACCEPT
+-A INPUT -p icmp --icmp-type echo-request -j DROP
+-A INPUT -p icmp --icmp-type destination-unreachable -j ACCEPT
+-A INPUT -p icmp --icmp-type time-exceeded -j ACCEPT
+
+# --- SSH (rate limited, port 2222) ---
+-A INPUT -p tcp --dport 2222 -m conntrack --ctstate NEW -j SSH_RATE_LIMIT
+-A SSH_RATE_LIMIT -m recent --set --name SSH --rsource
+-A SSH_RATE_LIMIT -m recent --update --seconds 60 --hitcount 4 --name SSH --rsource -j DROP
+-A SSH_RATE_LIMIT -j ACCEPT
+
+# --- HTTP/HTTPS ---
+-A INPUT -p tcp --dport 80 -m conntrack --ctstate NEW -j ACCEPT
+-A INPUT -p tcp --dport 443 -m conntrack --ctstate NEW -j ACCEPT
+
+# --- DNS ---
+-A INPUT -p tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+-A INPUT -p udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+
+# --- NTP ---
+-A INPUT -p udp --dport 123 -m conntrack --ctstate NEW -j ACCEPT
+
+# --- Block common attack patterns ---
+-A INPUT -p tcp --tcp-flags ALL NONE -j DROP
+-A INPUT -p tcp --tcp-flags ALL ALL -j DROP
+-A INPUT -p tcp --tcp-flags ALL FIN,URG,PSH -j DROP
+-A INPUT -p tcp --tcp-flags ALL SYN,RST,ACK,FIN,URG -j DROP
+-A INPUT -p tcp --tcp-flags SYN,RST SYN,RST -j DROP
+-A INPUT -p tcp --tcp-flags SYN,FIN SYN,FIN -j DROP
+
+# --- Log dropped packets (rate limited) ---
+-A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables-dropped: " --log-level 4
+
+COMMIT
