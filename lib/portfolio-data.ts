@@ -136,7 +136,7 @@ export const defaultPortfolioData: PortfolioData = {
         description: 'Built a custom IDS using Python and Scapy to monitor network traffic and detect suspicious patterns. Implemented signature-based detection and alerting mechanisms.',
         technologies: ['Python', 'Scapy', 'Wireshark', 'Linux'],
         githubUrl: 'https://github.com/Aadarhs',
-        demoUrl: 'https://github.com/Aadarhs',
+        demoUrl: '',
       },
       {
         title: 'Web Application Security Scanner',
@@ -144,7 +144,7 @@ export const defaultPortfolioData: PortfolioData = {
         description: 'Developed an automated vulnerability scanner for web applications focusing on OWASP Top 10 vulnerabilities. Includes SQL injection, XSS, and CSRF detection.',
         technologies: ['JavaScript', 'Node.js', 'Burp Suite', 'SQL'],
         githubUrl: 'https://github.com/Aadarhs',
-        demoUrl: 'https://github.com/Aadarhs',
+        demoUrl: '',
       },
       {
         title: 'Cryptography Implementation Lab',
@@ -152,7 +152,7 @@ export const defaultPortfolioData: PortfolioData = {
         description: 'Implemented various encryption algorithms including AES, RSA, and hash functions from scratch. Explored symmetric and asymmetric cryptography concepts.',
         technologies: ['Python', 'Cryptography', 'Mathematics', 'Security Protocols'],
         githubUrl: 'https://github.com/Aadarhs',
-        demoUrl: 'https://github.com/Aadarhs',
+        demoUrl: '',
       },
       {
         title: 'Incident Response Playbook',
@@ -160,7 +160,7 @@ export const defaultPortfolioData: PortfolioData = {
         description: 'Created comprehensive documentation for incident response procedures including detection, containment, and recovery steps for common attack vectors.',
         technologies: ['Documentation', 'Risk Management', 'Security Operations', 'Analysis'],
         githubUrl: 'https://github.com/Aadarhs',
-        demoUrl: 'https://github.com/Aadarhs',
+        demoUrl: '',
       },
       {
         title: 'Linux Hardening Guide',
@@ -168,7 +168,7 @@ export const defaultPortfolioData: PortfolioData = {
         description: 'Documented systematic approach to hardening Linux systems including SSH configuration, firewall rules, and service management best practices.',
         technologies: ['Linux', 'Bash', 'Security Hardening', 'Systems Administration'],
         githubUrl: 'https://github.com/Aadarhs',
-        demoUrl: 'https://github.com/Aadarhs',
+        demoUrl: '',
       },
       {
         title: 'Malware Analysis Lab',
@@ -176,7 +176,7 @@ export const defaultPortfolioData: PortfolioData = {
         description: 'Analyzed malware behavior in isolated environments using static and dynamic analysis techniques. Documented findings and indicators of compromise.',
         technologies: ['Reverse Engineering', 'Sandboxing', 'IDA Pro', 'Wireshark'],
         githubUrl: 'https://github.com/Aadarhs',
-        demoUrl: 'https://github.com/Aadarhs',
+        demoUrl: '',
       },
     ],
   },

@@ -57,6 +57,17 @@ export default function Projects() {
                   <Github className="h-4 w-4" />
                   Code
                 </a>
+                {project.demoUrl && project.demoUrl !== project.githubUrl && (
+                  <a
+                    href={project.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-sm text-muted-foreground hover:text-accent transition-colors"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    Demo
+                  </a>
+                )}
               </div>
             </div>
           ))}
