@@ -95,15 +95,15 @@ export default function AsuraPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-6 flex gap-6">
+      <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
         {/* Sidebar */}
-        <div className="w-48 flex-shrink-0">
-          <div className="glassmorphism rounded-lg p-2 space-y-1 sticky top-20">
+        <div className="w-full md:w-48 flex-shrink-0">
+          <div className="glassmorphism rounded-lg p-2 space-y-1 md:sticky md:top-20 flex md:block flex-wrap gap-1">
             {sections.map((section) => (
               <button
                 key={section}
                 onClick={() => setActiveSection(section)}
-                className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`w-full md:w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   activeSection === section
                     ? 'bg-primary/20 text-primary'
                     : 'text-muted-foreground hover:text-foreground hover:bg-white/5'
@@ -227,7 +227,7 @@ function AboutEditor({ data, update, inputClass }: { data: PortfolioData; update
       <div className="border-t border-white/10 pt-6">
         <h3 className="text-lg font-semibold mb-4">Stats</h3>
         {data.about.stats.map((stat, i) => (
-          <div key={i} className="grid grid-cols-3 gap-3 mb-3">
+          <div key={i} className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3">
             <input
               className={inputClass}
               value={stat.value}

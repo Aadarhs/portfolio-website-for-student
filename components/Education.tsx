@@ -29,7 +29,7 @@ export default function Education() {
                 </div>
 
                 <div className="glassmorphism p-6 space-y-4 flex-1">
-                  <div className="flex items-start justify-between">
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
                     <div>
                       <h3 className="text-xl font-semibold text-foreground">{edu.degree}</h3>
                       <p className="text-accent font-medium">{edu.institution}</p>
@@ -42,7 +42,7 @@ export default function Education() {
 
                   <p className="text-primary font-medium">{edu.gpa}</p>
 
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {edu.highlights.map((highlight) => (
                       <span
                         key={highlight}

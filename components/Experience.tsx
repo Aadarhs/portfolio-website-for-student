@@ -29,7 +29,7 @@ export default function Experience() {
                 </div>
 
                 <div className="glassmorphism p-6 space-y-4 flex-1">
-                  <div className="flex items-start justify-between">
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
                     <div>
                       <h3 className="text-xl font-semibold text-foreground">{exp.title}</h3>
                       <p className="text-primary font-medium">{exp.company}</p>

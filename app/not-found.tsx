@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <div className="min-h-screen bg-[#0a0e27] text-foreground flex items-center justify-center">
       <div className="text-center space-y-6 px-4">
-        <h1 className="text-8xl font-bold glow-text">404</h1>
+        <h1 className="text-6xl sm:text-8xl font-bold glow-text">404</h1>
         <p className="text-xl text-muted-foreground">This page has been breached.</p>
         <p className="text-muted-foreground">The page you are looking for does not exist or has been moved.</p>
         <Link

@@ -87,7 +87,7 @@ export default function ProjectDetail({ slug }: { slug: string }) {
           </p>
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-4">
           {project.githubUrl && (
             <a
               href={project.githubUrl}
